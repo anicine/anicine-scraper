@@ -1,0 +1,6 @@
+/anicine-scraper-*
+/build/*
+*.gz
+*.json
+*.html
+*.env*
