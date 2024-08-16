@@ -1,5 +1,6 @@
 /anicine-scraper-*
 /build/*
+/cert/*
 *.gz
 *.json
 *.html
