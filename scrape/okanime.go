@@ -140,45 +140,47 @@ func (x *okAnime) fetch(endpoint *url.URL) ([]*EpisodeNode, error) {
 	doc.Find("div.enable-photos-box").Find("div.row").Each(func(_ int, s *goquery.Selection) {
 		s.Find(".item").Each(func(_ int, z *goquery.Selection) {
 			info := z.Find(".video-subtitle").Text()
-			if info != "" {
-				if !x.isMovie {
-					for _, v := range x.episodes {
-						if strings.ReplaceAll(info, " ", "") == fmt.Sprintf("الحلقة%d", v) {
-							if href, ok := z.Attr("href"); ok {
-								if href != "" {
-									link, err := url.Parse(endpoint.Scheme + "://" + endpoint.Host + href)
-									if err != nil {
-										x.log.Error("cannot parse the episode url", "ep", v, "error", err)
-										return
-									}
-									x.log.Info("found episode url", "ep", v, "link", link.Path)
-									nodes = append(nodes, &EpisodeNode{
-										Number: v,
-										Link:   link,
-									})
-								}
-							}
-							break
-						}
-					}
-				} else {
-					if href, ok := z.Attr("href"); ok {
-						if href != "" {
-							link, err := url.Parse(endpoint.Scheme + "://" + endpoint.Host + href)
-							if err != nil {
-								x.log.Error("cannot parse the episode url", "error", err)
-								return
-							}
-							x.log.Info("found movie episode url", "link", link.Path)
-							nodes = append(nodes, &EpisodeNode{
-								Number: -1,
-								Link:   link,
-							})
-						}
-					}
-					return
-				}
+			if info == "" {
+				return
 			}
+			if !x.isMovie {
+				for _, v := range x.episodes {
+					if strings.ReplaceAll(info, " ", "") == fmt.Sprintf("الحلقة%d", v) {
+						if href, ok := z.Attr("href"); ok {
+							if href != "" {
+								link, err := url.Parse(endpoint.Scheme + "://" + endpoint.Host + href)
+								if err != nil {
+									x.log.Error("cannot parse the episode url", "ep", v, "error", err)
+									return
+								}
+								x.log.Info("found episode url", "ep", v, "link", link.Path)
+								nodes = append(nodes, &EpisodeNode{
+									Number: v,
+									Link:   link,
+								})
+							}
+						}
+						break
+					}
+				}
+			} else {
+				if href, ok := z.Attr("href"); ok {
+					if href != "" {
+						link, err := url.Parse(endpoint.Scheme + "://" + endpoint.Host + href)
+						if err != nil {
+							x.log.Error("cannot parse the episode url", "error", err)
+							return
+						}
+						x.log.Info("found movie episode url", "link", link.Path)
+						nodes = append(nodes, &EpisodeNode{
+							Number: -1,
+							Link:   link,
+						})
+					}
+				}
+				return
+			}
+
 		})
 	})
 	if len(nodes) == 0 {
