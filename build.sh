@@ -44,7 +44,7 @@ build_go() {
   output_file="${output_file}-${arch}"
 
   # Perform the build
-  GOOS=linux GOARCH="$arch" CGO_ENABLED="$enable_cgo" \
+  GOAMD64=v3 GOOS=linux GOARCH="$arch" CGO_ENABLED="$enable_cgo" \
     go build -v \
       $tags \
       -ldflags="${LDFLAGS[*]}" \
@@ -68,7 +68,7 @@ LDFLAGS_=(
   "-w" "-s" "-extldflags '-static'"
 )
 GCFLAGS_=(
-  "-S" "-m"
+  "-l=4" "-S" "-m"
 )
 
 # Clean temporary build files
