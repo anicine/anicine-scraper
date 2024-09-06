@@ -133,7 +133,7 @@ type AnimeResource struct {
 	AniList     int    `json:"AniList"`
 	AniDB       int    `json:"AniDB"`
 	Kitsu       string `json:"Kitsu"`
-	TVDBID      int64  `json:"TVDBMovieID,omitempty"`
+	TVDBID      int64  `json:"TVDBID"`
 	TMDBID      int64  `json:"TMDBID"`
 	IMDBID      string `json:"IMDBID"`
 	AniSearch   int64  `json:"AniSearch"`
