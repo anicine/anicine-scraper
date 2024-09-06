@@ -4,4 +4,4 @@
 *.gz
 *.json
 *.html
-*.env*
+.env*
