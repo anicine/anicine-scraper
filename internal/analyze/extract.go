@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/anicine/anicine-scraper/internal/errs"
+	"github.com/anicine/anicine-scraper/models"
 )
 
 func ExtractYear(input string) (int, error) {
@@ -102,6 +103,23 @@ func ExtractIntsWithRanges(input string) []int {
 	}
 
 	return extractedInts
+}
+
+func ExtractAnimeLinks(input string) []models.AnimeLink {
+	if input == "" {
+		return nil
+	}
+	matches := linksExp.FindAllStringSubmatch(input, -1)
+
+	var links []models.AnimeLink
+	for _, match := range matches {
+		links = append(links, models.AnimeLink{
+			Site: match[1],
+			URL:  match[2],
+		})
+	}
+
+	return links
 }
 
 func ExtractEngChars(input string) string {
