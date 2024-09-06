@@ -178,29 +178,25 @@ type AnimeEpisode struct {
 	Resources      AnimeEpisodeResources `json:"Resources"`
 }
 
+type AnimeThemeVideo struct {
+	Source     string `json:"Source"`
+	Resolution int    `json:"Resolution"`
+	Link       string `json:"Link"`
+}
+
+type AnimeThemeEntry struct {
+	Episodes []int             `json:"Episodes"`
+	Videos   []AnimeThemeVideo `json:"Videos"`
+}
+
+type AnimeThemeItem struct {
+	Song    string            `json:"Song"`
+	Entries []AnimeThemeEntry `json:"Entries"`
+}
+
 type AnimeThemes struct {
-	OP []struct {
-		Song    string `json:"Song"`
-		Entries []struct {
-			Episodes []int `json:"Episodes"`
-			Videos   []struct {
-				Source     string `json:"Source"`
-				Resolution int    `json:"Resolution"`
-				Link       string `json:"Link"`
-			} `json:"Videos"`
-		} `json:"Entries"`
-	} `json:"OP"`
-	ED []struct {
-		Song    string `json:"Song"`
-		Entries []struct {
-			Episodes []int `json:"Episodes"`
-			Videos   []struct {
-				Source     string `json:"Source"`
-				Resolution int    `json:"Resolution"`
-				Link       string `json:"Link"`
-			} `json:"Videos"`
-		} `json:"Entries"`
-	} `json:"ED"`
+	OP []AnimeThemeItem `json:"OP"`
+	ED []AnimeThemeItem `json:"ED"`
 }
 
 type AnimeSeason struct {
