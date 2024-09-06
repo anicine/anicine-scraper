@@ -247,3 +247,99 @@ type Anime struct {
 	Banners         []AnimeImage     `json:"Banners"`
 	Arts            []AnimeImage     `json:"Arts"`
 }
+
+type AnimeContentRating struct {
+	TVPG string `json:"TVPG"`
+	MPAA string `json:"MPAA"`
+}
+
+type AnimeTime struct {
+	Year  int   `json:"Year"`
+	Month int   `json:"Month"`
+	Day   int   `json:"Day"`
+	Unix  int64 `json:"Unix"`
+}
+
+type FinalAnimeSeasonResource struct {
+	Mal         int    `json:"Mal"`
+	AniList     int    `json:"AniList"`
+	AniDB       int    `json:"AniDB"`
+	Kitsu       string `json:"Kitsu"`
+	TVDBID      int64  `json:"TVDBID"`
+	TMDBID      int64  `json:"TMDBID"`
+	AniSearch   int64  `json:"AniSearch"`
+	LiveChart   int64  `json:"LiveChart"`
+	NotifyMoe   string `json:"NotifyMoe"`
+	AnimePlanet string `json:"AnimePlanet"`
+}
+
+type FinalAnimeMovieResource struct {
+	Mal         int    `json:"Mal"`
+	AniList     int    `json:"AniList"`
+	AniDB       int    `json:"AniDB"`
+	Kitsu       string `json:"Kitsu"`
+	TVDBID      int64  `json:"TVDBID,omitempty"`
+	TMDBID      int64  `json:"TMDBID"`
+	IMDBID      string `json:"IMDBID"`
+	AniSearch   int64  `json:"AniSearch"`
+	LiveChart   int64  `json:"LiveChart"`
+	NotifyMoe   string `json:"NotifyMoe"`
+	AnimePlanet string `json:"AnimePlanet"`
+	WikiData    string `json:"WikiData"`
+}
+
+type FinalAnimeEpisode struct {
+	OriginalTitle string                `json:"OriginalTitle"`
+	RomanjiTitle  string                `json:"RomanjiTitle"`
+	Aired         bool                  `json:"Aired"`
+	ReleaseTime   AnimeTime             `json:"ReleaseTime"`
+	MetaData      []MetaData            `json:"MetaData"`
+	Runtime       int                   `json:"Runtime"`
+	Filler        bool                  `json:"Filler"`
+	Special       bool                  `json:"Special"`
+	Number        float32               `json:"Number"`
+	ThumbnailIMG  AnimeImage            `json:"ThumbnailIMG"`
+	Resources     AnimeEpisodeResources `json:"Resources"`
+}
+
+type FinalAnimeSeason struct {
+	MetaData      []MetaData               `json:"MetaData"`
+	Resources     FinalAnimeSeasonResource `json:"Resources"`
+	PortraitIMG   AnimeImage               `json:"PortraitIMG"`
+	Number        int                      `json:"Number"`
+	ContentRating AnimeContentRating       `json:"ContentRating,omitempty"`
+	Status        string                   `json:"Status"`
+	Posters       []AnimeImage             `json:"Posters"`
+	Trailers      []AnimeTrailer           `json:"Trailers"`
+	Themes        AnimeThemes              `json:"Themes,omitempty"`
+	Episodes      []FinalAnimeEpisode      `json:"Episodes"`
+}
+
+type FinalAnime struct {
+	Type   string `json:"Type"`
+	Titles struct {
+		Original string   `json:"Original"`
+		Synonyms []string `json:"Synonyms"`
+	} `json:"Titles"`
+	MetaData      []MetaData              `json:"MetaData"`
+	PortraitIMG   AnimeImage              `json:"PortraitIMG"`
+	LandscapeIMG  AnimeImage              `json:"LandscapeIMG"`
+	ContentRating AnimeContentRating      `json:"ContentRating,omitempty"`
+	Posters       []AnimeImage            `json:"Posters"`
+	Backdrops     []AnimeImage            `json:"Backdrops"`
+	Logos         []AnimeImage            `json:"Logos"`
+	Banners       []AnimeImage            `json:"Banners"`
+	Arts          []AnimeImage            `json:"Arts"`
+	Period        AnimePeriod             `json:"Period"`
+	StartAt       AnimeDate               `json:"StartAt"`
+	EndAt         AnimeDate               `json:"EndAt"`
+	Studios       []AnimeCompany          `json:"Studios"`
+	Genres        []AnimeGenre            `json:"Genres"`
+	Producers     []AnimeCompany          `json:"Producers"`
+	Licensors     []AnimeCompany          `json:"Licensors"`
+	Tags          []AnimeTag              `json:"Tags"`
+	External      []AnimeLink             `json:"External"`
+	Resources     FinalAnimeMovieResource `json:"Resources,omitempty"`
+	Themes        AnimeThemes             `json:"Themes,omitempty"`
+	Seasons       []FinalAnimeSeason      `json:"Seasons,omitempty"`
+}
