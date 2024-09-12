@@ -24,18 +24,16 @@ type animeThemesAnime struct {
 		Path  string `json:"path,omitempty"`
 		Link  string `json:"link,omitempty"`
 	} `json:"images,omitempty"`
-	Animethemes []struct {
+	AnimeThemes []struct {
 		ID                int    `json:"id,omitempty"`
-		Sequence          any    `json:"sequence,omitempty"`
 		Slug              string `json:"slug,omitempty"`
 		Type              string `json:"type,omitempty"`
-		Animethemeentries []struct {
+		AnimeThemeEntries []struct {
 			ID       int    `json:"id,omitempty"`
 			Episodes string `json:"episodes,omitempty"`
 			Notes    string `json:"notes,omitempty"`
 			Nsfw     bool   `json:"nsfw,omitempty"`
 			Spoiler  bool   `json:"spoiler,omitempty"`
-			Version  any    `json:"version,omitempty"`
 			Videos   []struct {
 				ID         int    `json:"id,omitempty"`
 				Basename   string `json:"basename,omitempty"`
@@ -48,13 +46,11 @@ type animeThemesAnime struct {
 				Size       int    `json:"size,omitempty"`
 				Source     string `json:"source,omitempty"`
 				Subbed     bool   `json:"subbed,omitempty"`
-				Uncen      bool   `json:"uncen,omitempty"`
 				Tags       string `json:"tags,omitempty"`
 				Link       string `json:"link,omitempty"`
 			} `json:"videos,omitempty"`
 		} `json:"animethemeentries,omitempty"`
-		Group any `json:"group,omitempty"`
-		Song  struct {
+		Song struct {
 			ID    int    `json:"id,omitempty"`
 			Title string `json:"title,omitempty"`
 		} `json:"song,omitempty"`
