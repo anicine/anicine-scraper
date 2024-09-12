@@ -1,7 +1,5 @@
 package models
 
-import "time"
-
 type AnimeInfo struct {
 	Title string
 	Query string
@@ -165,8 +163,7 @@ type AnimeEpisode struct {
 	JpTitle        string                `json:"JpTitle,omitempty"`
 	RmTitle        string                `json:"RmTitle,omitempty"`
 	Aired          bool                  `json:"Aired"`
-	ReleaseTime    time.Time             `json:"ReleaseTime"`
-	UnixTime       int64                 `json:"UnixTime"`
+	ReleaseTime    AnimeTime             `json:"ReleaseTime"`
 	MetaData       []MetaData            `json:"MetaData"`
 	Runtime        int                   `json:"Runtime"`
 	Filler         bool                  `json:"Filler"`
