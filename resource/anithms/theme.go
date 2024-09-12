@@ -85,19 +85,19 @@ func Fetch(ctx context.Context, original, english, romanji string, year int, sea
 		}
 	}
 
-	if anime == nil {
-		return nil, errs.ErrNotFound
+	if anime != nil {
+		return clean(anime), nil
 	}
 
-	return clean(anime), nil
+	return nil, errs.ErrNotFound
 }
 
 func clean(anime *animeThemesAnime) *models.AnimeThemes {
 	themes := new(models.AnimeThemes)
-	for _, v1 := range anime.Animethemes {
+	for _, v1 := range anime.AnimeThemes {
 		var theme models.AnimeThemeItem
 		theme.Song = analyze.CleanUnicode(v1.Song.Title)
-		for _, v2 := range v1.Animethemeentries {
+		for _, v2 := range v1.AnimeThemeEntries {
 			var entry models.AnimeThemeEntry
 			entry.Episodes = analyze.ExtractIntsWithRanges(v2.Episodes)
 			for _, v3 := range v2.Videos {
