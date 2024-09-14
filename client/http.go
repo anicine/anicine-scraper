@@ -80,7 +80,6 @@ func clean(req *http.Request, resp *http.Response) {
 	if req != nil && req.Body != nil {
 		req.Body.Close()
 	}
-	resp.Cookies()
 	if resp != nil && resp.Body != nil {
 		resp.Body.Close()
 	}
