@@ -15,8 +15,8 @@ import (
 
 func Movie(ctx context.Context, tmdbid int) (*FunArtMovie, error) {
 	var (
-		err  error
-		args = &url.URL{
+		err      error
+		endpoint = &url.URL{
 			Scheme:   "https",
 			Host:     "webservice.fanart.tv",
 			Path:     "/v3/movies/" + strconv.Itoa(tmdbid),
@@ -25,16 +25,16 @@ func Movie(ctx context.Context, tmdbid int) (*FunArtMovie, error) {
 	)
 
 	var art FunArtMovie
-	for i := 0; i < length()-1; i += 1 {
+	for i := 0; i < length(); i += 1 {
 		if err = func() error {
 			body, err := client.Do(ctx, &client.Args{
 				Proxy:    true,
 				Method:   http.MethodGet,
-				Endpoint: args,
+				Endpoint: endpoint,
 			})
 			if err != nil {
 				logger.Warn("retry to query anime art", "TMDB", tmdbid, "error", err)
-				args.RawQuery = "api_key=" + generate()
+				endpoint.RawQuery = "api_key=" + generate()
 				return err
 			}
 
@@ -65,8 +65,8 @@ func Movie(ctx context.Context, tmdbid int) (*FunArtMovie, error) {
 
 func TV(ctx context.Context, tvdbid int) (*FunArtTv, error) {
 	var (
-		err  error
-		args = &url.URL{
+		err      error
+		endpoint = &url.URL{
 			Scheme:   "https",
 			Host:     "webservice.fanart.tv",
 			Path:     "/v3/tv/" + strconv.Itoa(tvdbid),
@@ -75,16 +75,16 @@ func TV(ctx context.Context, tvdbid int) (*FunArtTv, error) {
 	)
 
 	var art FunArtTv
-	for i := 0; i < length()-1; i += 1 {
+	for i := 0; i < length(); i += 1 {
 		if err = func() error {
 			body, err := client.Do(ctx, &client.Args{
 				Proxy:    true,
 				Method:   http.MethodGet,
-				Endpoint: args,
+				Endpoint: endpoint,
 			})
 			if err != nil {
 				logger.Warn("retry to query anime art", "TVDB", tvdbid, "error", err)
-				args.RawQuery = "api_key=" + generate()
+				endpoint.RawQuery = "api_key=" + generate()
 				return err
 			}
 
