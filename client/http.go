@@ -91,7 +91,7 @@ func agent(retries int, args *Args) *http.Client {
 		if args.Proxy {
 			return proxy
 		}
-	} else if retries > 2 {
+	} else if retries > 7 {
 		return http.DefaultClient
 	}
 	return http.DefaultClient
@@ -111,7 +111,7 @@ func Do(ctx context.Context, args *Args) (io.Reader, error) {
 	)
 
 	// Retry loop for handling failures
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		select {
 		case <-ctx.Done():
 			return nil, context.Canceled
