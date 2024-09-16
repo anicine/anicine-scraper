@@ -133,6 +133,8 @@ func Do(ctx context.Context, args *Args) (io.Reader, error) {
 			logger.Info("accepted response", "proxy", args.Proxy, "code", resp.StatusCode, "link", args.Endpoint.Path)
 
 			switch resp.StatusCode {
+			case http.StatusPreconditionFailed, http.StatusPreconditionRequired:
+				return nil, errs.ErrBadData
 			case http.StatusOK, http.StatusNotModified:
 				args.cookies = resp.Cookies()
 				if body := reader(resp.Body); body != nil {
