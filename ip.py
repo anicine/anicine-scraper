@@ -34,4 +34,4 @@ with Controller.from_port(port=9051) as controller:
         print(f"Tor IP changed to: {new_ip}")
 
         # Wait a seconds before changing IP again
-        time.sleep(11)
+        time.sleep(7)
