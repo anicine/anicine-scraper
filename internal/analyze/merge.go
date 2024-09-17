@@ -848,88 +848,88 @@ func MergeAnimeTypes(anime ...*models.Anime) string {
 	return strings.ToUpper(data)
 }
 
-func mergeAnimeStartDate(anime ...*models.Anime) models.AnimeDate {
-	var (
-		filter = make(map[models.AnimeDate]bool)
-		date   models.AnimeDate
-	)
+// func mergeAnimeStartDate(anime ...*models.Anime) models.AnimeDate {
+// 	var (
+// 		filter = make(map[models.AnimeDate]bool)
+// 		date   models.AnimeDate
+// 	)
 
-	for _, v := range anime {
-		if v != nil {
-			if !v.StartAt.IsZero() {
-				if filter[v.StartAt] {
-					return v.StartAt
-				} else {
-					filter[v.StartAt] = true
-				}
-			}
-		}
-	}
+// 	for _, v := range anime {
+// 		if v != nil {
+// 			if !v.StartAt.IsZero() {
+// 				if filter[v.StartAt] {
+// 					return v.StartAt
+// 				} else {
+// 					filter[v.StartAt] = true
+// 				}
+// 			}
+// 		}
+// 	}
 
-	return date
-}
+// 	return date
+// }
 
-func mergeAnimeEndDate(anime ...*models.Anime) models.AnimeDate {
-	var (
-		filter = make(map[models.AnimeDate]bool)
-		date   models.AnimeDate
-	)
+// func mergeAnimeEndDate(anime ...*models.Anime) models.AnimeDate {
+// 	var (
+// 		filter = make(map[models.AnimeDate]bool)
+// 		date   models.AnimeDate
+// 	)
 
-	for _, v := range anime {
-		if v != nil {
-			if !v.EndAt.IsZero() {
-				if filter[v.EndAt] {
-					return v.EndAt
-				} else {
-					filter[v.EndAt] = true
-				}
-			}
-		}
-	}
+// 	for _, v := range anime {
+// 		if v != nil {
+// 			if !v.EndAt.IsZero() {
+// 				if filter[v.EndAt] {
+// 					return v.EndAt
+// 				} else {
+// 					filter[v.EndAt] = true
+// 				}
+// 			}
+// 		}
+// 	}
 
-	return date
-}
+// 	return date
+// }
 
-func mergeAnimePeriod(date models.AnimeDate, anime ...*models.Anime) models.AnimePeriod {
-	var (
-		filter []models.AnimePeriod
-		data   models.AnimePeriod
-	)
+// func mergeAnimePeriod(date models.AnimeDate, anime ...*models.Anime) models.AnimePeriod {
+// 	var (
+// 		filter []models.AnimePeriod
+// 		data   models.AnimePeriod
+// 	)
 
-	for _, v := range anime {
-		if v != nil {
-			if v.Period.Season == "" && v.Period.Year == 0 {
-				continue
-			}
-			filter = append(filter, v.Period)
-		}
-	}
+// 	for _, v := range anime {
+// 		if v != nil {
+// 			if v.Period.Season == "" && v.Period.Year == 0 {
+// 				continue
+// 			}
+// 			filter = append(filter, v.Period)
+// 		}
+// 	}
 
-	for _, v := range filter {
-		if v.Season != "" {
-			data.Season = strings.ToLower(v.Season)
-		}
+// 	for _, v := range filter {
+// 		if v.Season != "" {
+// 			data.Season = strings.ToLower(v.Season)
+// 		}
 
-		if v.Year != 0 {
-			data.Year = v.Year
-		}
+// 		if v.Year != 0 {
+// 			data.Year = v.Year
+// 		}
 
-		if data.Season != "" && data.Year != 0 {
-			return data
-		}
-	}
+// 		if data.Season != "" && data.Year != 0 {
+// 			return data
+// 		}
+// 	}
 
-	if data.Season == "" {
-		for _, v := range shared.Seasons {
-			for _, x := range v.Zone {
-				if date.Month == int(x) {
-					data.Season = v.Name
-					return data
-				}
-			}
+// 	if data.Season == "" {
+// 		for _, v := range shared.Seasons {
+// 			for _, x := range v.Zone {
+// 				if date.Month == int(x) {
+// 					data.Season = v.Name
+// 					return data
+// 				}
+// 			}
 
-		}
-	}
+// 		}
+// 	}
 
-	return data
-}
+// 	return data
+// }
