@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/anicine/anicine-scraper/internal/errs"
+	"github.com/anicine/anicine-scraper/internal/shared"
 	"github.com/anicine/anicine-scraper/models"
 )
 
@@ -67,6 +68,10 @@ func ExtractNum(input string) int {
 }
 
 func ExtractIntsWithRanges(input string) []int {
+	if input == "" {
+		return []int{-1}
+	}
+
 	var extractedInts []int
 	encountered := make(map[int]bool) // Keep track of encountered numbers
 
@@ -168,4 +173,23 @@ func ExtractAnimePath(i1 string) string {
 	}
 
 	return ""
+}
+
+func ExtractAnimePeriod(date models.AnimeDate) models.AnimePeriod {
+	if date.IsZero() {
+		return models.AnimePeriod{}
+	}
+
+	var result models.AnimePeriod
+	for _, v := range shared.Seasons {
+		for _, x := range v.Zone {
+			if date.Month == int(x) {
+				result.Season = v.Name
+				result.Year = date.Year
+				return result
+			}
+		}
+	}
+
+	return models.AnimePeriod{}
 }
