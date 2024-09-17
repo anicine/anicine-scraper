@@ -16,7 +16,7 @@ def get_tor_ip_via_privoxy():
         response = requests.get('http://httpbin.org/ip', proxies=proxies)
         return response.json()['origin']
     except Exception as e:
-        return f"Error fetching IP via Privoxy: {e}"
+        return f"Error fetching IP : {e}"
 
 # Connect to Tor control port
 with Controller.from_port(port=9051) as controller:
