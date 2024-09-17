@@ -130,7 +130,7 @@ func Do(ctx context.Context, args *Args) (io.Reader, error) {
 			}
 			defer clean(req, resp)
 
-			logger.Info("accepted response", "proxy", args.Proxy, "code", resp.StatusCode, "link", args.Endpoint.Path)
+			logger.Info("accepted response", "proxy", args.Proxy, "code", resp.StatusCode, "host", args.Endpoint.Host, "link", args.Endpoint.Path)
 
 			switch resp.StatusCode {
 			case http.StatusPreconditionFailed, http.StatusPreconditionRequired:
