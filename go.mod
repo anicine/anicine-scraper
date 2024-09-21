@@ -5,7 +5,7 @@ go 1.23.0
 require (
 	github.com/PuerkitoBio/goquery v1.10.0
 	github.com/cyruzin/golang-tmdb v1.6.7
-	github.com/darenliang/jikan-go v1.2.3
+	github.com/djeddi-yacine/jikan-go v0.0.0-20240921195335-eb2ccfadc399
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/sync v0.8.0
 )
