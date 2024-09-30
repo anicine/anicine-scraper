@@ -9,7 +9,6 @@ def get_tor_ip_via_privoxy():
     """
     proxies = {
         'http': 'http://localhost:8118',  # Privoxy's default port
-        'https': 'http://localhost:8118',
     }
     try:
         # Making a request to an external IP check service via the Privoxy proxy
